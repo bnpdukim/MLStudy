@@ -40,19 +40,25 @@ def max_pool(x) :
 
 # 합성곱층1
 with tf.name_scope('conv1') as scope:
-    W_conv1 = weight_variable('conv1', [5,5,1,32])
-    b_conv1 = bias_variable('conv1', 32)
+    W_conv1 = weight_variable('conv1', [5, 5, 1, 64])
+    # W_conv1 = weight_variable('conv1', [5, 5, 1, 32])
+    b_conv1 = bias_variable('conv1', 64)
+    # b_conv1 = bias_variable('conv1', 32)
     x_image = tf.reshape(x, [-1,28,28,1])
     h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1)+b_conv1)
+    print(h_conv1)
 
 # 폴링층1
 with tf.name_scope('pool1') as scope:
     h_pool1 = max_pool(h_conv1)
+    print(h_pool1)
 
 # 합성곱층2
 with tf.name_scope('conv2') as scope:
-    W_conv2 = weight_variable('conv2', [5,5,32,64])
-    b_conv2 = bias_variable('conv2', 64)
+    W_conv2 = weight_variable('conv2', [5, 5, 64, 128])
+    # W_conv2 = weight_variable('conv2', [5, 5, 32, 64])
+    b_conv2 = bias_variable('conv2', 128)
+    # b_conv2 = bias_variable('conv2', 64)
     h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
 
 # 폴링층2
@@ -61,7 +67,8 @@ with tf.name_scope('pool2') as scope:
 
 # 전결합층
 with tf.name_scope('fully_connected') as scope:
-    n = 7*7*64
+    n = 7 * 7 * 128
+    # n = 7 * 7 * 64
     W_fc = weight_variable('fc', [n,1024])
     b_fc = bias_variable('fc', 1024)
     h_pool2_flat = tf.reshape(h_pool2, [-1,n])
@@ -98,7 +105,7 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     tw = tf.summary.FileWriter('log_dir', graph=sess.graph)
     test_fd = set_feed(mnist.test.images, mnist.test.labels, 1)
-    for step in range(10000):
+    for step in range(1000):
         batch = mnist.train.next_batch(50)
         fd = set_feed(batch[0], batch[1], 0.5)
         _, loss = sess.run([train_step, cross_entropy], feed_dict = fd)
