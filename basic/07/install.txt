@@ -1,0 +1,9 @@
+https://github.com/bnpdukim/MLStudy
+
+$ git clone https://github.com/jayrambhia/Install-OpenCV.git
+$ cd Install-OpenCV/Ubuntu
+$ ./opencv_latest.sh
+
+$ pip3 install opencv-python
+
+$ cp /usr/share/opencv/haarcascade_frontalface_alt.xml ./
