@@ -2,3 +2,4 @@ log_dir/
 .ipynb_checkpoints/
 .idea/
 mnist/
+data/
