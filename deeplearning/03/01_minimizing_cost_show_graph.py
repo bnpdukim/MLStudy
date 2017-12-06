@@ -29,4 +29,6 @@ for i in range(-30, 50):
 
 # Show the cost function
 plt.plot(W_history, cost_history)
+plt.xlabel("W")
+plt.ylabel("cost")
 plt.show()

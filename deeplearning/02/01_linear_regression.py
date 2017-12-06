@@ -23,7 +23,7 @@ for step in range(2001):
     cost_val, W_val, b_val, _ = \
         sess.run([cost, W, b, train],feed_dict={X: [1, 2, 3], Y: [1, 2, 3]})
     if step % 20 == 0:
-        print(step, cost_val, W_val, b_val)
+        print(step, cost_val)
 
 print(sess.run(hypothesis, feed_dict={X: [5]}))
 print(sess.run(hypothesis, feed_dict={X: [2.5]}))
@@ -36,12 +36,12 @@ for step in range(2001):
                         Y: [2.1, 3.1, 4.1, 5.1, 6.1]}
                  )
     if step % 20 == 0:
-        print("step : ", step, ", cost : ", cost_val, "w, eight : ", W_val, ", bias : ",b_val)
+        print("step : ", step, ", cost : ", cost_val, ", weight : ", W_val, ", bias : ",b_val)
 
 
 print(sess.run(hypothesis, feed_dict={X: [5]}))
 print(sess.run(hypothesis, feed_dict={X: [2.5]}))
 print(sess.run(hypothesis, feed_dict={X: [1.5, 3.5]}))
-
-plt.plot([1, 2, 3, 4, 5], [2.1, 3.1, 4.1, 5.1, 6.1])
-plt.show()
+#
+# plt.plot([1, 2, 3, 4, 5], [2.1, 3.1, 4.1, 5.1, 6.1])
+# plt.show()
