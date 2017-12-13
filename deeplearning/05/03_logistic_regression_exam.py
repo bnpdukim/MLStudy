@@ -36,10 +36,6 @@ y_data = data.iloc[:, cols - 1:cols]
 
 print(x_data.shape, y_data.shape)
 
-
-x_data =
-
-
 # placeholders for a tensor that will be always fed.
 X = tf.placeholder(tf.float32, shape=[None, 3])
 Y = tf.placeholder(tf.float32, shape=[None, 1])
@@ -47,7 +43,7 @@ Y = tf.placeholder(tf.float32, shape=[None, 1])
 W = tf.Variable(tf.random_normal([3, 1]), name='weight')
 
 # Hypothesis using sigmoid: tf.div(1., 1. + tf.exp(tf.matmul(X, W)))
-hypothesis = tf.nn.relu(tf.matmul(X, W))
+hypothesis = tf.sigmoid(tf.matmul(X, W))
 print(hypothesis)
 # cost/loss function
 cost = -tf.reduce_mean(Y * tf.log(hypothesis) + (1 - Y) *
