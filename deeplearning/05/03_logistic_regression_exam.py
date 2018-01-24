@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 tf.set_random_seed(777)  # for reproducibility
 
-data = pd.read_csv(os.path.join('data', 'ex2data1.txt'), header=None, names=['Exam 1', 'Exam 2', 'Admitted'])
+data = pd.read_csv(os.path.join('data', 'ex2data2.txt'), header=None, names=['Exam 1', 'Exam 2', 'Admitted'])
 
 
 def showSource():
@@ -43,7 +43,8 @@ Y = tf.placeholder(tf.float32, shape=[None, 1])
 W = tf.Variable(tf.random_normal([3, 1]), name='weight')
 
 # Hypothesis using sigmoid: tf.div(1., 1. + tf.exp(tf.matmul(X, W)))
-hypothesis = tf.sigmoid(tf.matmul(X, W))
+hypothesis = tf.nn.sigmoid(tf.matmul(X, W))
+
 print(hypothesis)
 # cost/loss function
 cost = -tf.reduce_mean(Y * tf.log(hypothesis) + (1 - Y) *
@@ -60,11 +61,10 @@ accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, Y), dtype=tf.float32))
 with tf.Session() as sess:
     # Initialize TensorFlow variables
     sess.run(tf.global_variables_initializer())
-
     for step in range(10001):
         cost_val, _ = sess.run([cost, train], feed_dict={X: x_data, Y: y_data})
         if step % 200 == 0:
-            print(step, cost_val)
+            print(step,  cost_val)
 
     # Accuracy report
     h, c, a = sess.run([hypothesis, predicted, accuracy],
